@@ -1,0 +1,1 @@
+project is to create a ai bot that will be a part of restaurent website. it will be conversation based that will make user feel like they are talking to a person not a bot. bot will also ask for user mood so it can recommend food based on user mood. it will do menu ordering and tell about services.
