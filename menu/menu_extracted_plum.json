@@ -1,5 +1,5 @@
 {
-  "restaurant_name": "plum COFFEE + COCKTAILS",
+  "restaurant_name": "plum",
   "phone": null,
   "categories": [
     {
@@ -14,19 +14,19 @@
           "price": 445
         },
         {
-          "name": "MINESTRONE SOUP",
+          "name": "MINESTRONE SOUP - Veg",
           "price": 445
         },
         {
-          "name": "MINESTRONE SOUP",
+          "name": "MINESTRONE SOUP - Non Veg",
           "price": 455
         },
         {
-          "name": "WILD MUSHROOM CAPPUCCINO",
+          "name": "WILD MUSHROOM CAPPUCCINO - Veg",
           "price": 445
         },
         {
-          "name": "WILD MUSHROOM CAPPUCCINO",
+          "name": "WILD MUSHROOM CAPPUCCINO - Non Veg",
           "price": 455
         }
       ]
@@ -43,11 +43,11 @@
           "price": 445
         },
         {
-          "name": "PLUM CAESAR SALAD",
+          "name": "PLUM CAESAR SALAD - Veg",
           "price": 445
         },
         {
-          "name": "PLUM CAESAR SALAD",
+          "name": "PLUM CAESAR SALAD - Non Veg",
           "price": 475
         },
         {
@@ -93,11 +93,11 @@
       "category": "BREAD & MORE",
       "items": [
         {
-          "name": "GARLIC BREAD WITH CHEESE",
+          "name": "GARLIC BREAD WITH CHEESE - Veg",
           "price": 445
         },
         {
-          "name": "GARLIC BREAD WITH CHEESE",
+          "name": "GARLIC BREAD WITH CHEESE - Non Veg",
           "price": 475
         },
         {
@@ -170,11 +170,11 @@
           "price": 575
         },
         {
-          "name": "KOLKATA KATHI ROLL",
+          "name": "KOLKATA KATHI ROLL - Veg",
           "price": 475
         },
         {
-          "name": "KOLKATA KATHI ROLL",
+          "name": "KOLKATA KATHI ROLL - Non Veg",
           "price": 525
         },
         {
@@ -190,12 +190,12 @@
           "price": 575
         },
         {
-          "name": "AZTEC NACHOS",
-          "price": 475
+          "name": "AZTEC NACHOS - Veg",
+          "price": 425
         },
         {
-          "name": "AZTEC NACHOS",
-          "price": 425
+          "name": "AZTEC NACHOS - Non Veg",
+          "price": 475
         },
         {
           "name": "AVOCADO & FETA TOAST",
@@ -226,11 +226,7 @@
           "price": 575
         },
         {
-          "name": "COUNTRY HAM CROQUETTES",
-          "price": 595
-        },
-        {
-          "name": "CLASSIC CHICKEN TIKKA",
+          "name": "COUNTRY HAM CROQUETTES CLASSIC CHICKEN TIKKA",
           "price": 595
         },
         {

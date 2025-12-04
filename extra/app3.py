@@ -37,57 +37,9 @@ def convert_pdf_to_image(pdf_path):
     except Exception as e:
         print(f"Error converting PDF: {e}")
         return None
-
-
-def extract_restaurant_info(file_path, groq_api_key):
-    """Extract restaurant name and phone from first page only"""
-    client = Groq(api_key=groq_api_key)
-    
-    with open(file_path, "rb") as file:
-        file_data = base64.b64encode(file.read()).decode("utf-8")
-    
-    prompt = """Extract restaurant name and phone number. Return ONLY JSON:
-
-{
-  "restaurant_name": "string or null",
-  "phone": "string or null"
-}
-"""
-    
-    try:
-        completion = client.chat.completions.create(
-            model="meta-llama/llama-4-maverick-17b-128e-instruct",
-            temperature=0.1,
-            max_tokens=200,
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": prompt},
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:image/png;base64,{file_data}"}
-                        }
-                    ]
-                }
-            ]
-        )
-        
-        response = completion.choices[0].message.content.strip()
-        if response.startswith("```json"):
-            response = response[7:]
-        if response.startswith("```"):
-            response = response[3:]
-        if response.endswith("```"):
-            response = response[:-3]
-        
-        return json.loads(response.strip())
-    except:
-        return {"restaurant_name": None, "phone": None}
  
  
 def extract_menu_to_json(file_path, groq_api_key, retry_with_shorter_prompt=False):
-    """Extract menu items from a single page with retry logic"""
     client = Groq(api_key=groq_api_key)
  
     with open(file_path, "rb") as file:
@@ -101,13 +53,16 @@ Rules:
 - Split items with multiple prices into separate entries
 - Add variant/size to item name
 - Price = number only
-- Output ONLY JSON
+- Use only plain ASCII characters in item names (replace special characters with regular letters)
+- Output ONLY valid JSON, no extra text
 """
     else:
         prompt = """Extract all menu items from this restaurant menu image and return ONLY a valid JSON object.
  
 Structure the JSON like this:
 {
+  "restaurant_name": "string or null",
+  "phone": "string or null",
   "categories": [
     {
       "category": "string",
@@ -118,13 +73,19 @@ Structure the JSON like this:
   ]
 }
  
-Rules:
-1. Extract all items with exact names and prices.
-2. Group items by category headers.
-3. If an item has multiple prices (different sizes, variants, or options), create separate entries for each.
-4. Include size/variant information in the item name to distinguish them.
-5. Prices must be numbers only (no strings like "180/190").
-6. No explanations. Only JSON.
+CRITICAL RULES:
+1. Extract ALL items with exact names and prices.
+2. IMPORTANT: Identify category headers by these characteristics:
+   - Text that is visually distinct (bold, larger font, different style, or underlined)
+   - Text that appears alone on a line or section without a price immediately after it
+   - Text that logically groups the items below it
+3. Create a NEW category for each distinct section heading you identify.
+4. If you see text without a price that appears to introduce a new section of items, treat it as a category header.
+5. If an item has multiple prices (different sizes/variants), create separate entries for each.
+6. Include size/variant information in the item name to distinguish them.
+7. Prices must be numbers only (no strings like "140/150"). If no price is visible, use null.
+8. IMPORTANT: Ensure all text uses standard characters. Replace special characters (é, â, etc.) with regular letters.
+9. No explanations. Only valid JSON.
 """
  
     try:
@@ -164,20 +125,31 @@ Rules:
         print(f"⚠ JSON Parse Error: {e}")
         print(f"⚠ Attempting to fix malformed JSON...")
         
-        # Try to salvage partial JSON
-        try:
-            last_brace = response_text.rfind('}')
-            if last_brace > 0:
-                test_json = response_text[:last_brace+1]
-                open_braces = test_json.count('{')
-                close_braces = test_json.count('}')
-                test_json += '}' * (open_braces - close_braces)
+        # Try multiple recovery strategies
+        recovery_attempts = [
+            # Strategy 1: Remove control characters
+            lambda txt: txt.encode('utf-8', 'ignore').decode('utf-8', 'ignore'),
+            # Strategy 2: Replace problematic characters
+            lambda txt: txt.replace('\n', ' ').replace('\r', ' ').replace('\t', ' '),
+            # Strategy 3: Fix truncated JSON
+            lambda txt: txt[:txt.rfind('}')+1] if txt.rfind('}') > 0 else txt,
+        ]
+        
+        for idx, strategy in enumerate(recovery_attempts, 1):
+            try:
+                cleaned_text = strategy(response_text)
                 
-                menu_data = json.loads(test_json)
-                print("✓ Successfully recovered partial data")
+                # Balance braces if needed
+                open_braces = cleaned_text.count('{')
+                close_braces = cleaned_text.count('}')
+                if open_braces > close_braces:
+                    cleaned_text += '}' * (open_braces - close_braces)
+                
+                menu_data = json.loads(cleaned_text)
+                print(f"✓ Successfully recovered data using strategy {idx}")
                 return menu_data
-        except:
-            pass
+            except:
+                continue
         
         print("✗ Could not recover data from this page")
         
@@ -191,43 +163,23 @@ Rules:
     except Exception as e:
         print(f"API Error: {e}")
         return None
-
-
-def save_page_json(page_data, output_dir, page_num):
-    """Save individual page JSON to temp directory"""
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, f"page_{page_num}.json")
-    
+ 
+ 
+def save_menu_json(menu_data, input_path, output_filename=None):
+    input_dir = os.path.dirname(input_path) or "."
+ 
+    if output_filename is None:
+        input_name = os.path.splitext(os.path.basename(input_path))[0]
+        output_filename = f"{input_name}_extracted.json"
+ 
+    output_path = os.path.join(input_dir, output_filename)
+ 
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(page_data, f, indent=2, ensure_ascii=False)
-    
+        json.dump(menu_data, f, indent=2, ensure_ascii=False)
+ 
+    print(f"Saved JSON to {output_path}")
     return output_path
 
-
-def merge_page_jsons(output_dir, restaurant_info, final_output_path):
-    """Merge all page JSONs into final output"""
-    all_categories = []
-    
-    page_files = sorted([f for f in os.listdir(output_dir) if f.startswith("page_") and f.endswith(".json")])
-    
-    for page_file in page_files:
-        page_path = os.path.join(output_dir, page_file)
-        with open(page_path, "r", encoding="utf-8") as f:
-            page_data = json.load(f)
-            all_categories.extend(page_data.get("categories", []))
-    
-    combined = {
-        "restaurant_name": restaurant_info.get("restaurant_name"),
-        "phone": restaurant_info.get("phone"),
-        "categories": all_categories
-    }
-    
-    with open(final_output_path, "w", encoding="utf-8") as f:
-        json.dump(combined, f, indent=2, ensure_ascii=False)
-    
-    print(f"Saved final JSON to {final_output_path}")
-    return combined
- 
 
 def cleanup_images(image_paths):
     """Delete temporary image files created from PDF conversion"""
@@ -243,7 +195,7 @@ if __name__ == "__main__":
     import sys
     
     if len(sys.argv) < 2:
-        print("Usage: python3 app.py <menu_file>")
+        print("Usage: python3 script.py <menu_file>")
         print("Supported formats: PDF, JPG, JPEG, PNG")
         exit(1)
     
@@ -264,61 +216,77 @@ if __name__ == "__main__":
     else:
         FILE_PATHS = [menu_file]
  
-    # Create temp directory for page JSONs
+    # Create temp directory for individual page JSONs
     menu_dir = os.path.dirname(menu_file) or "."
     menu_name = os.path.splitext(os.path.basename(menu_file))[0]
     temp_dir = os.path.join(menu_dir, f".{menu_name}_pages")
+    os.makedirs(temp_dir, exist_ok=True)
     
     print("Extracting menu data...")
     
-    # Extract restaurant info from first page only
-    print("\nExtracting restaurant info from first page...")
-    restaurant_info = extract_restaurant_info(FILE_PATHS[0], GROQ_API_KEY)
-    print(f"Restaurant: {restaurant_info.get('restaurant_name')}")
-    print(f"Phone: {restaurant_info.get('phone')}")
- 
-    # Process each page and save individually
+    restaurant_name = None
+    phone = None
     successful_pages = 0
+ 
     for i, path in enumerate(FILE_PATHS, 1):
-        print(f"\n{'='*60}")
+        print(f"\n{'='*50}")
         print(f"Processing page {i}/{len(FILE_PATHS)}...")
-        print(f"{'='*60}")
-        
+        print(f"{'='*50}")
         menu_data = extract_menu_to_json(path, GROQ_API_KEY)
         
         if menu_data:
-            save_page_json(menu_data, temp_dir, i)
+            # Save individual page JSON immediately
+            page_json_path = os.path.join(temp_dir, f"page_{i}.json")
+            with open(page_json_path, "w", encoding="utf-8") as f:
+                json.dump(menu_data, f, indent=2, ensure_ascii=False)
+            
+            if not restaurant_name:
+                restaurant_name = menu_data.get("restaurant_name")
+            if not phone:
+                phone = menu_data.get("phone")
+            
             print(f"✓ Successfully extracted {len(menu_data.get('categories', []))} categories from page {i}")
-            print(f"✓ Saved page {i} JSON")
             successful_pages += 1
         else:
             print(f"✗ Failed to extract data from page {i}")
     
-    # Clean up temporary PDF page images
+    # Clean up temporary images if PDF was converted
     if is_pdf:
         print("\nCleaning up temporary image files...")
         cleanup_images(FILE_PATHS)
-        print("✓ Temporary image files removed")
+        print("✓ Temporary files removed")
     
     # Merge all page JSONs into final output
     if successful_pages > 0:
-        print(f"\n{'='*60}")
-        print("MERGING ALL PAGES")
-        print(f"{'='*60}")
+        all_categories = []
+        page_files = sorted([f for f in os.listdir(temp_dir) if f.startswith("page_") and f.endswith(".json")])
         
-        final_output = os.path.join(menu_dir, f"{menu_name}_extracted.json")
-        combined = merge_page_jsons(temp_dir, restaurant_info, final_output)
+        for page_file in page_files:
+            with open(os.path.join(temp_dir, page_file), "r", encoding="utf-8") as f:
+                page_data = json.load(f)
+                all_categories.extend(page_data.get("categories", []))
+        
+        combined_menu = {
+            "restaurant_name": restaurant_name,
+            "phone": phone,
+            "categories": all_categories
+        }
         
         # Clean up temp directory
         shutil.rmtree(temp_dir)
-        print(f"✓ Cleaned up temporary page JSONs")
         
-        total_items = sum(len(cat["items"]) for cat in combined.get("categories", []))
-        print(f"\n{'='*60}")
+        print("\n" + "="*50)
+        print("EXTRACTION COMPLETE")
+        print("="*50)
+ 
+        save_menu_json(combined_menu, menu_file)
+ 
+        total_items = sum(len(cat["items"]) for cat in combined_menu.get("categories", []))
+        print("\n" + "="*50)
         print("SUMMARY")
-        print(f"{'='*60}")
+        print("="*50)
         print(f"Pages Processed: {successful_pages}/{len(FILE_PATHS)}")
-        print(f"Categories Extracted: {len(combined['categories'])}")
+        print(f"Categories Extracted: {len(combined_menu.get('categories', []))}")
         print(f"Total Items: {total_items}")
     else:
         print("\n✗ No data extracted from any page!")

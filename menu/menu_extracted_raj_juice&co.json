@@ -18,7 +18,7 @@
           "price": 250
         },
         {
-          "name": "Dal Makhawali",
+          "name": "Dal Makhanwali",
           "price": 260
         },
         {
@@ -58,7 +58,7 @@
           "price": 260
         },
         {
-          "name": "Veg Kadah",
+          "name": "Veg Kadhi",
           "price": 260
         },
         {
@@ -155,7 +155,7 @@
           "price": 280
         },
         {
-          "name": "Paneer Lazeej (Chef Specials)",
+          "name": "Paneer Lazeef (Chef Specials)",
           "price": 280
         },
         {
@@ -217,7 +217,7 @@
         },
         {
           "name": "Afghani Paneer Tikka",
-          "price": 200
+          "price": 280
         },
         {
           "name": "Achari Paneer Tikka",
@@ -225,7 +225,7 @@
         },
         {
           "name": "Haryali Paneer Tikka",
-          "price": 250
+          "price": 280
         },
         {
           "name": "Tandoori Chaap Tikka",
@@ -362,11 +362,11 @@
           "price": 300
         },
         {
-          "name": "Manchuriyan with Noodles",
+          "name": "Manchuryan with Noodles",
           "price": 300
         },
         {
-          "name": "Chilli Paneer with Noodles",
+          "name": "Chilli with Noodles",
           "price": 300
         },
         {
@@ -421,7 +421,7 @@
       "category": "Normal Thali",
       "items": [
         {
-          "name": "Normal Thali",
+          "name": "3 Pcs Butter Roti, Dal Makhani, Paneer Butter Masala/Kadhai Paneer, Raita , Mint chutyney with salad",
           "price": 200
         }
       ]
@@ -430,7 +430,7 @@
       "category": "Standard Thali",
       "items": [
         {
-          "name": "Standard Thali",
+          "name": "2 Pcs Laccha Paratha, Dal Makhani, Kadhai Paneer, Jeera Rice , Raita Mint, Chutney With Salad",
           "price": 230
         }
       ]
@@ -439,7 +439,7 @@
       "category": "Deluxe Thali",
       "items": [
         {
-          "name": "Deluxe Thali",
+          "name": "2 Pcs Staff Naan, Dal Makhani, Paneer Butter Masala/Kadhai Paneer, Mix Veg Jeera Rice, 1 Pc Gulab Jamun Raita Mint Chutney With Salad",
           "price": 280
         }
       ]
@@ -449,11 +449,11 @@
       "items": [
         {
           "name": "Water Bottle",
-          "price": null
+          "price": 0
         },
         {
           "name": "Soft Drinks",
-          "price": null
+          "price": 0
         }
       ]
     },
@@ -499,27 +499,6 @@
         {
           "name": "Veg Haidrabadi Briyani with Raita",
           "price": 210
-        }
-      ]
-    },
-    {
-      "category": "Seasonal Item",
-      "items": [
-        {
-          "name": "Navratri Thali",
-          "price": 220
-        },
-        {
-          "name": "Makki Di Roti Sarson Da Saag Thali",
-          "price": 220
-        },
-        {
-          "name": "Aloo Chaat",
-          "price": 130
-        },
-        {
-          "name": "Hot Coffee",
-          "price": 50
         }
       ]
     },
@@ -602,6 +581,27 @@
         {
           "name": "Traffic Jam",
           "price": 190
+        }
+      ]
+    },
+    {
+      "category": "Seasonal Item",
+      "items": [
+        {
+          "name": "Navratri Thali",
+          "price": 220
+        },
+        {
+          "name": "Makki Di Roti Sarson Da Saag Thali",
+          "price": 220
+        },
+        {
+          "name": "Aloo Chaat",
+          "price": 130
+        },
+        {
+          "name": "Hot Coffee",
+          "price": 50
         }
       ]
     },
@@ -694,15 +694,15 @@
         },
         {
           "name": "Apple Juice - Large",
-          "price": 80
+          "price": 100
         },
         {
           "name": "Apple Juice - Ex.Large",
-          "price": 90
+          "price": 110
         },
         {
           "name": "Apple Juice - Jumbo",
-          "price": 110
+          "price": 150
         },
         {
           "name": "Orange Juice - Medium",
@@ -718,7 +718,7 @@
         },
         {
           "name": "Orange Juice - Jumbo",
-          "price": 130
+          "price": 110
         },
         {
           "name": "Kinnu Juice - Medium",
@@ -851,15 +851,15 @@
           "price": 120
         },
         {
-          "name": "Khajoor Shake - Medium",
+          "name": "Khaoor Shake - Medium",
           "price": 100
         },
         {
-          "name": "Khajoor Shake - Large",
+          "name": "Khaoor Shake - Large",
           "price": 110
         },
         {
-          "name": "Khajoor Shake - Ex.Large",
+          "name": "Khaoor Shake - Ex.Large",
           "price": 120
         },
         {
@@ -885,352 +885,6 @@
         {
           "name": "Anjeer Shake - Ex.Large",
           "price": 120
-        }
-      ]
-    },
-    {
-      "category": "Two in One Shakes",
-      "items": [
-        {
-          "name": "Mango+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Mango+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Mango+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Banana+Chickoo Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Banana+Chickoo Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Banana+Chickoo Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Honey+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Honey+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Honey+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Strawberry+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Strawberry+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Strawberry+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Apple+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Apple+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Apple+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Khajoor+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Khajoor+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Khajoor+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Banana+Peanut Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Banana+Peanut Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Banana+Peanut Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Chocolate+Banana Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Chocolate+Banana Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Chocolate+Banana Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Khajoor+Chikoo Shake - Medium",
-          "price": 110
-        },
-        {
-          "name": "Khajoor+Chikoo Shake - Large",
-          "price": 120
-        },
-        {
-          "name": "Khajoor+Chikoo Shake - Ex.Large",
-          "price": 130
-        }
-      ]
-    },
-    {
-      "category": "Flavoured Shakes",
-      "items": [
-        {
-          "name": "White Rose Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "White Rose Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "White Rose Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Black Rose Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Black Rose Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Black Rose Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Orange Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Orange Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Orange Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Pan Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Pan Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Pan Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Kesar Pista Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Kesar Pista Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Kesar Pista Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Butter Scotch Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Butter Scotch Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Butter Scotch Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Sahi Gulab Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Sahi Gulab Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Sahi Gulab Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Guava Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Guava Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Guava Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Blue Berry Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Blue Berry Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Blue Berry Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Litchi Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Litchi Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Litchi Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Black Current Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Black Current Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Black Current Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Kesar Badam Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Kesar Badam Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Kesar Badam Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Vanilla Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Vanilla Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Vanilla Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Strawberry Shake - Medium",
-          "price": 100
-        },
-        {
-          "name": "Strawberry Shake - Large",
-          "price": 110
-        },
-        {
-          "name": "Strawberry Shake - Ex.Large",
-          "price": 120
-        },
-        {
-          "name": "Zafrani Pista Shake - Medium",
-          "price": 110
-        },
-        {
-          "name": "Zafrani Pista Shake - Large",
-          "price": 120
-        },
-        {
-          "name": "Zafrani Pista Shake - Ex.Large",
-          "price": 130
-        },
-        {
-          "name": "Creamy Litchi Shake - Medium",
-          "price": 110
-        },
-        {
-          "name": "Creamy Litchi Shake - Large",
-          "price": 120
-        },
-        {
-          "name": "Creamy Litchi Shake - Ex.Large",
-          "price": 130
-        },
-        {
-          "name": "Biscoff Shake - Medium",
-          "price": 110
-        },
-        {
-          "name": "Biscoff Shake - Large",
-          "price": 120
-        },
-        {
-          "name": "Biscoff Shake - Ex.Large",
-          "price": 130
-        },
-        {
-          "name": "Wild Berry Shake - Medium",
-          "price": 110
-        },
-        {
-          "name": "Wild Berry Shake - Large",
-          "price": 120
-        },
-        {
-          "name": "Wild Berry Shake - Ex.Large",
-          "price": 130
-        },
-        {
-          "name": "Banana Blue Berry - Medium",
-          "price": 110
-        },
-        {
-          "name": "Banana Blue Berry - Large",
-          "price": 120
-        },
-        {
-          "name": "Banana Blue Berry - Ex.Large",
-          "price": 130
         }
       ]
     },
@@ -1418,15 +1072,15 @@
           "price": 130
         },
         {
-          "name": "Borbon Biscuits - Medium",
+          "name": "Bourbon Biscuits - Medium",
           "price": 100
         },
         {
-          "name": "Borbon Biscuits - Large",
+          "name": "Bourbon Biscuits - Large",
           "price": 120
         },
         {
-          "name": "Borbon Biscuits - Ex.Large",
+          "name": "Bourbon Biscuits - Ex.Large",
           "price": 130
         },
         {
@@ -1454,15 +1108,15 @@
           "price": 130
         },
         {
-          "name": "Nutella Shakes - Medium",
+          "name": "Nuttela Shakes - Medium",
           "price": 100
         },
         {
-          "name": "Nutella Shakes - Large",
+          "name": "Nuttela Shakes - Large",
           "price": 120
         },
         {
-          "name": "Nutella Shakes - Ex.Large",
+          "name": "Nuttela Shakes - Ex.Large",
           "price": 130
         },
         {
@@ -1660,6 +1314,352 @@
       ]
     },
     {
+      "category": "Two in One Shakes",
+      "items": [
+        {
+          "name": "Mango+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Mango+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Mango+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Banana+Chickoo Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Banana+Chickoo Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Banana+Chickoo Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Honey+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Honey+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Honey+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Strawberry+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Strawberry+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Strawberry+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Apple+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Apple+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Apple+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Khao+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Khao+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Khao+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Banana+Peanut Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Banana+Peanut Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Banana+Peanut Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Chocolate+Banana Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Chocolate+Banana Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Chocolate+Banana Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Khao+Chikoo Shake - Medium",
+          "price": 110
+        },
+        {
+          "name": "Khao+Chikoo Shake - Large",
+          "price": 120
+        },
+        {
+          "name": "Khao+Chikoo Shake - Ex.Large",
+          "price": 130
+        }
+      ]
+    },
+    {
+      "category": "Flavoured Shakes",
+      "items": [
+        {
+          "name": "White Rose Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "White Rose Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "White Rose Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Black Rose Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Black Rose Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Black Rose Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Orange Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Orange Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Orange Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Pan Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Pan Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Pan Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Kesar Pista Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Kesar Pista Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Kesar Pista Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Butter Scotch Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Butter Scotch Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Butter Scotch Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Sahi Gulab Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Sahi Gulab Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Sahi Gulab Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Guava Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Guava Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Guava Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Blue Berry Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Blue Berry Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Blue Berry Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Litchi Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Litchi Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Litchi Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Black Current Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Black Current Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Black Current Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Kesar Badam Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Kesar Badam Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Kesar Badam Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Vanilla Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Vanilla Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Vanilla Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Strawberry Shake - Medium",
+          "price": 100
+        },
+        {
+          "name": "Strawberry Shake - Large",
+          "price": 110
+        },
+        {
+          "name": "Strawberry Shake - Ex.Large",
+          "price": 120
+        },
+        {
+          "name": "Zafrani Pista shake - Medium",
+          "price": 110
+        },
+        {
+          "name": "Zafrani Pista shake - Large",
+          "price": 120
+        },
+        {
+          "name": "Zafrani Pista shake - Ex.Large",
+          "price": 130
+        },
+        {
+          "name": "Creamy Litchi Shake - Medium",
+          "price": 110
+        },
+        {
+          "name": "Creamy Litchi Shake - Large",
+          "price": 120
+        },
+        {
+          "name": "Creamy Litchi Shake - Ex.Large",
+          "price": 130
+        },
+        {
+          "name": "Biscoff Shake - Medium",
+          "price": 110
+        },
+        {
+          "name": "Biscoff Shake - Large",
+          "price": 120
+        },
+        {
+          "name": "Biscoff Shake - Ex.Large",
+          "price": 130
+        },
+        {
+          "name": "Wild Berry Shake - Medium",
+          "price": 110
+        },
+        {
+          "name": "Wild Berry Shake - Large",
+          "price": 120
+        },
+        {
+          "name": "Wild Berry Shake - Ex.Large",
+          "price": 130
+        },
+        {
+          "name": "Banana Blue Berry - Medium",
+          "price": 110
+        },
+        {
+          "name": "Banana Blue Berry - Large",
+          "price": 120
+        },
+        {
+          "name": "Banana Blue Berry - Ex.Large",
+          "price": 130
+        }
+      ]
+    },
+    {
       "category": "Coolers",
       "items": [
         {
@@ -1789,7 +1789,7 @@
         },
         {
           "name": "Cold Coffee Brownie - Large",
-          "price": 110
+          "price": 120
         },
         {
           "name": "Cold Coffee Brownie - Ex.Large",
@@ -1860,11 +1860,15 @@
           "price": 110
         },
         {
-          "name": "Jawa Choco Chip Coffee - Large",
+          "name": "Jawa Choco Chip Coffee -Coffee Mocha Chip Coffee -Medium",
+          "price": 110
+        },
+        {
+          "name": "Coffee Mocha Chip Coffee - Large",
           "price": 120
         },
         {
-          "name": "Jawa Choco Chip Coffee - Ex.Large",
+          "name": "Coffee Mocha Chip Coffee - Ex.Large",
           "price": 130
         },
         {
@@ -1918,8 +1922,8 @@
           "price": 120
         },
         {
-          "name": "Lemon Corinder Soup",
-          "price": 120
+          "name": "Lemon Coriender Soup",
+          "price": 130
         },
         {
           "name": "Cream of Mashroom Soup",
@@ -1955,7 +1959,7 @@
           "price": 210
         },
         {
-          "name": "Gobi Manchurian Dry",
+          "name": "Gobhi Manchurian Dry",
           "price": 250
         },
         {
@@ -1996,7 +2000,7 @@
         },
         {
           "name": "Crunchy Munchy Spring Roll",
-          "price": 180
+          "price": 280
         },
         {
           "name": "Veggi Delight Noodles",
@@ -2004,7 +2008,7 @@
         },
         {
           "name": "Veggi Chilli Garlic Noodles",
-          "price": 200
+          "price": 230
         },
         {
           "name": "Veg Singapuri Noodles",
@@ -2016,15 +2020,15 @@
         },
         {
           "name": "Veg Butter Paneer Noodles",
-          "price": 210
+          "price": 230
         },
         {
           "name": "Veg Butter Chaap Noodles",
-          "price": 210
+          "price": 230
         },
         {
           "name": "Kurkure Chaap",
-          "price": 180
+          "price": 230
         },
         {
           "name": "Veg Fried Rice",
@@ -2036,7 +2040,7 @@
         },
         {
           "name": "Chinese Platter",
-          "price": 360
+          "price": 310
         },
         {
           "name": "Chinese Sizzeler",
@@ -2052,7 +2056,7 @@
           "price": 120
         },
         {
-          "name": "Veg Steam Momos",
+          "name": "Paneer Steam Momos",
           "price": 140
         },
         {
@@ -2077,7 +2081,7 @@
         },
         {
           "name": "Crunchy kurkure Paneer Momos",
-          "price": 220
+          "price": 170
         },
         {
           "name": "Pizza Momos Baked (6 Pc)",
@@ -2167,7 +2171,7 @@
           "price": 110
         },
         {
-          "name": "Peri Peri Fries",
+          "name": "Peri Fries",
           "price": 130
         },
         {
@@ -2184,7 +2188,7 @@
           "price": 150
         },
         {
-          "name": "Spanich Cheese Toast",
+          "name": "Spanish Cheese Toast",
           "price": 160
         },
         {

@@ -12,6 +12,26 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
  
 if not GROQ_API_KEY:
     raise ValueError("GROQ_API_KEY not found. Add it to your .env file.")
+
+
+def extract_text_with_ocr(image_path):
+    """Extract text from image using Tesseract OCR"""
+    try:
+        import pytesseract
+        from PIL import Image
+        
+        # Open image and extract text
+        img = Image.open(image_path)
+        text = pytesseract.image_to_string(img)
+        return text.strip()
+    except ImportError:
+        print("⚠ pytesseract not installed. Run: pip install pytesseract pillow")
+        print("⚠ Also install Tesseract: sudo apt install tesseract-ocr (Linux) or brew install tesseract (Mac)")
+        return None
+    except Exception as e:
+        print(f"⚠ OCR extraction failed: {e}")
+        return None
+
  
 def convert_pdf_to_image(pdf_path):
     try:
@@ -39,14 +59,38 @@ def convert_pdf_to_image(pdf_path):
         return None
  
  
-def extract_menu_to_json(file_path, groq_api_key, retry_with_shorter_prompt=False):
+def extract_menu_to_json(file_path, groq_api_key, retry_with_shorter_prompt=False, use_ocr=True):
     client = Groq(api_key=groq_api_key)
  
     with open(file_path, "rb") as file:
         file_data = base64.b64encode(file.read()).decode("utf-8")
 
+    # Extract text using OCR if enabled
+    ocr_text = None
+    if use_ocr:
+        print("  → Running OCR text extraction...")
+        ocr_text = extract_text_with_ocr(file_path)
+        if ocr_text:
+            print(f"  → OCR extracted {len(ocr_text)} characters")
+
     if retry_with_shorter_prompt:
-        prompt = """Extract menu items as JSON:
+        if ocr_text:
+            prompt = f"""Extract menu items as JSON from this image and OCR text.
+
+OCR Text:
+{ocr_text}
+
+Output format:
+{{"categories": [{{"category": "string", "items": [{{"name": "string", "price": number}}]}}]}}
+
+Rules:
+- Use OCR text to verify item names and prices
+- Split items with multiple prices into separate entries
+- Price = number only (use null if not found)
+- Use plain ASCII characters
+- Output ONLY valid JSON"""
+        else:
+            prompt = """Extract menu items as JSON:
 {"categories": [{"category": "string", "items": [{"name": "string", "price": number}]}]}
 
 Rules:
@@ -57,7 +101,43 @@ Rules:
 - Output ONLY valid JSON, no extra text
 """
     else:
-        prompt = """Extract all menu items from this restaurant menu image and return ONLY a valid JSON object.
+        if ocr_text:
+            prompt = f"""Extract all menu items from this restaurant menu image and OCR text. Return ONLY valid JSON.
+
+OCR Text (use this to help identify items and prices):
+{ocr_text}
+
+Structure the JSON like this:
+{{
+  "restaurant_name": "string or null",
+  "phone": "string or null",
+  "categories": [
+    {{
+      "category": "string",
+      "items": [
+        {{"name": "string", "price": number}}
+      ]
+    }}
+  ]
+}}
+ 
+CRITICAL RULES:
+1. Extract ALL items with exact names and prices from BOTH the image and OCR text.
+2. Use OCR text to verify spelling and numbers from the image.
+3. IMPORTANT: Identify category headers by these characteristics:
+   - Text that is visually distinct (bold, larger font, different style, or underlined)
+   - Text that appears alone on a line or section without a price immediately after it
+   - Text that logically groups the items below it
+4. Create a NEW category for each distinct section heading you identify.
+5. If you see text without a price that appears to introduce a new section of items, treat it as a category header.
+6. If an item has multiple prices (different sizes/variants), create separate entries for each.
+7. Include size/variant information in the item name to distinguish them.
+8. Prices must be numbers only (no strings like "180/190"). If no price is visible, use null.
+9. IMPORTANT: Ensure all text uses standard characters. Replace special characters (é, â, etc.) with regular letters.
+10. No explanations. Only valid JSON.
+"""
+        else:
+            prompt = """Extract all menu items from this restaurant menu image and return ONLY a valid JSON object.
  
 Structure the JSON like this:
 {
@@ -122,8 +202,8 @@ CRITICAL RULES:
         return menu_data
  
     except json.JSONDecodeError as e:
-        print(f"⚠ JSON Parse Error: {e}")
-        print(f"⚠ Attempting to fix malformed JSON...")
+        print(f"  ⚠ JSON Parse Error: {e}")
+        print(f"  ⚠ Attempting to fix malformed JSON...")
         
         # Try multiple recovery strategies
         recovery_attempts = [
@@ -146,22 +226,22 @@ CRITICAL RULES:
                     cleaned_text += '}' * (open_braces - close_braces)
                 
                 menu_data = json.loads(cleaned_text)
-                print(f"✓ Successfully recovered data using strategy {idx}")
+                print(f"  ✓ Successfully recovered data using strategy {idx}")
                 return menu_data
             except:
                 continue
         
-        print("✗ Could not recover data from this page")
+        print("  ✗ Could not recover data from this page")
         
         # Retry with shorter prompt if first attempt
         if not retry_with_shorter_prompt:
-            print("⚠ Retrying with minimal prompt...")
-            return extract_menu_to_json(file_path, groq_api_key, retry_with_shorter_prompt=True)
+            print("  ⚠ Retrying with minimal prompt...")
+            return extract_menu_to_json(file_path, groq_api_key, retry_with_shorter_prompt=True, use_ocr=use_ocr)
         
         return None
         
     except Exception as e:
-        print(f"API Error: {e}")
+        print(f"  API Error: {e}")
         return None
  
  
@@ -195,17 +275,24 @@ if __name__ == "__main__":
     import sys
     
     if len(sys.argv) < 2:
-        print("Usage: python3 script.py <menu_file>")
+        print("Usage: python3 script.py <menu_file> [--no-ocr]")
         print("Supported formats: PDF, JPG, JPEG, PNG")
+        print("Options:")
+        print("  --no-ocr    Disable OCR text extraction")
         exit(1)
     
     menu_file = sys.argv[1]
+    use_ocr = "--no-ocr" not in sys.argv
  
     if not os.path.exists(menu_file):
         print(f"File not found: {menu_file}")
         exit(1)
  
     print(f"Found: {menu_file}")
+    if use_ocr:
+        print("OCR enabled (improves accuracy)")
+    else:
+        print("OCR disabled")
  
     is_pdf = menu_file.lower().endswith(".pdf")
     
@@ -232,7 +319,7 @@ if __name__ == "__main__":
         print(f"\n{'='*50}")
         print(f"Processing page {i}/{len(FILE_PATHS)}...")
         print(f"{'='*50}")
-        menu_data = extract_menu_to_json(path, GROQ_API_KEY)
+        menu_data = extract_menu_to_json(path, GROQ_API_KEY, use_ocr=use_ocr)
         
         if menu_data:
             # Save individual page JSON immediately
